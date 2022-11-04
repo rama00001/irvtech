@@ -13,19 +13,22 @@ const register = async (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
         const user = new User_info({
-            email, password, firsrt_name, last_name, img
+            email, password
         });
-
-        const result = await user.save()
-        console.log(result);
-        res.json(result);
-
+        await user.save((err, user) => {
+            if (err) {
+                res.status(500).send({ message: err });
+                return;
+            }
+            else {
+                res.send({ message: "User was registered successfully!" });
+            }
+        });
     } catch (error) {
         console.log(error)
         res.json(error)
     }
 }
-
 
 const login = async (req, res) => {
     const email = req.body.email
@@ -113,9 +116,9 @@ const update_user = (req, res, next) => {
     let user_id = req.query.user_id
 
     let updateData = {
-        first_name : req.body.first_name,
-        last_name : req.body.last_name,
-        img : req.body.img
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        img: req.body.img
     }
     console.log(updateData)
     console.log(user_id)
@@ -137,7 +140,7 @@ router.post('/user/login', (req, res) => login(req, res))
 router.get('/users/list', (req, res) => user_list(req, res))
 router.post('/users/add', (req, res) => user_add(req, res))
 router.get('/get_single_user', (req, res) => get_single_user(req, res))
-router.put('/update_user/:user_id', auth , (req, res) => update_user(req, res))
+router.put('/update_user/:user_id', auth, (req, res) => update_user(req, res))
 
 
 export default router;
