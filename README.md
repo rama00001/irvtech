@@ -9,8 +9,8 @@ Register user with email and password fields.
 
  3)Create user profile:
  --------------------
- fisrt_name
- last_name
+ fisrt_name,
+ last_name,
  image(not completed)
 
  4)Get list of users:
@@ -24,4 +24,10 @@ Register user with email and password fields.
 
 running application:
 -------------------
+npm install
 npm start
+
+Schemas:
+-------
+User
+User Profile
