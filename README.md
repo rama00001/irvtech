@@ -29,5 +29,5 @@ npm start
 
 Schemas:
 -------
-User
-User Profile
+User,
+UserProfile
